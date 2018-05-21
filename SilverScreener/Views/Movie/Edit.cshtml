@@ -1,0 +1,51 @@
+﻿@model SilverScreener.ViewModels.MovieViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+<hr />
+@using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.Ratings, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.RatingId, new SelectList(Model.Ratings, "RatingId", "RatingName"), "", new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label" })
+            <input type="file" name="File" id="File" class="form-control" accept="image/*" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <strong>Genres</strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="checkbox-items">@Html.EditorFor(model => model.Genres)</ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <input type="submit" value="Add Movie" class="btn btn-default" />
+            @Html.HiddenFor(model => model.MovieId)
+        </div>
+    </div>
+}
+

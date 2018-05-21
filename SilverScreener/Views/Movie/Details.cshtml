@@ -1,0 +1,41 @@
+﻿@model SilverScreener.ViewModels.MovieViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+<div class="DetailImage">
+    <img src="@(SilverScreener.Helper.ImageHelper.ImageLocation + Model.Poster)" class="image-fluid" alt="@Model.Title"/>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <strong>Rating: </strong>@Html.DisplayFor(Model => Model.RatingName)
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <strong>Genre(s): </strong>
+        <ul class="moviegenres">
+            @foreach (var genre in Model.Genres)
+            {
+                <li>@genre.Display</li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.ActionLink("Back to List", "Index") | 
+        @Html.ActionLink("Edit Movie", "Edit", new { id = Model.MovieId })
+        
+        @Html.HiddenFor(Model => Model.MovieId)
+        @Html.HiddenFor(Model => Model.RatingId)
+    </div>
+</div>
+

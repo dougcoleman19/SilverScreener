@@ -1,0 +1,111 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+ul.checkbox-items li {
+    width: 282px;
+    float: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.checkbox-items li label {
+    font-weight: normal;
+}
+
+div.moviePreview {
+    width: 210px;
+    background-color: #D4C9C9;
+    padding: 3px;
+    margin: 4px;
+    float: left;
+    height: 341px;
+    display: block;
+}
+
+div.moviePreview img {
+    margin: 0 auto;
+    padding: 2px;
+    height: 296px;
+    width: 200px;
+}
+
+div.moviePreview p {
+    font-style: oblique;
+    padding-left: 4px;
+    font-size: 14px;
+}
+
+div.DetailImage {
+    border: 1px solid gray;
+    margin: 4px;
+    float: left;
+    width: 202px
+}
+
+ul.moviegenres {
+    list-style: none;
+    padding: 0;
+}
+
+ul.moviegenres li {
+    list-style: none;
+    display: block;
+    border: 2px solid rgba(0, 0, 255, .5);
+    padding: 5px;
+    margin: 2px;
+    float: left;
+}
+
+ul.genreSelectList {
+    list-style: none;
+    padding: 0;
+}
+
+ul.genreSelectList li {
+    list-style: none;
+    display: block;
+    float: left;
+    margin: 4px;
+
+}
+
+div#movieList:after, ul.genreSelectList:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+div.DetailImage {
+    float: left;
+    width: 250px;
+    border: 0 solid;
+}
+
+footer:before {
+    content: "";
+    clear: both;
+    display: table;
+}

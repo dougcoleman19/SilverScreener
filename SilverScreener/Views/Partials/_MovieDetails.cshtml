@@ -1,0 +1,8 @@
+﻿@model MovieViewModel
+
+<div class="moviePreview">
+    <a href="@Url.Action("Details", "Movie", new { id = Model.MovieId })">
+        <img src="@(SilverScreener.Helper.ImageHelper.ImageLocation + Model.Poster)" class="image-fluid" alt="@Model.Title"/>
+        <p>@Model.Title</p>
+    </a>
+</div>

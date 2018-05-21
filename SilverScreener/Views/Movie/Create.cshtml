@@ -1,0 +1,89 @@
+﻿@model SilverScreener.ViewModels.MovieViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h2>Add Movie to Theater</h2>
+    @if (Model.TheaterId.HasValue)
+    {
+        <strong>For: </strong>
+        @Model.Theater.Name
+    }
+    <hr />
+
+</div>
+
+@using (Html.BeginForm("Create", "Movie", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+
+     <div class="row">
+         <div class="col-md-12">
+             @if (Model.TheaterId.HasValue)
+             {
+                 @Html.HiddenFor(model => model.TheaterId);
+             }
+             else
+             {
+                 @Html.LabelFor(model => model.TheaterId, htmlAttributes: new {@class = "control-label"})
+                 @Html.DropDownListFor(model => model.TheaterId, new SelectList(ViewBag.AvailableTheaters, "TheaterId", "Name"), new {htmlAttributes = new {@class = "form-control"}})
+             }
+
+         </div>
+     </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.Ratings, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.RatingId, new SelectList(Model.Ratings, "RatingId", "RatingName"), "", new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label" })
+            <input type="file" name="File" id="File" class="form-control" accept="image/*" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.RunTime, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.RunTime, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <strong>Genres</strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="checkbox-items">@Html.EditorFor(model => model.Genres)</ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" value="Add Movie" class="btn btn-default" />
+            
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

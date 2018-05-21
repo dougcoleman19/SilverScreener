@@ -1,0 +1,19 @@
+﻿@model SilverScreener.ViewModels.TheaterViewModel
+
+
+<div class="row theater-details">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h2>
+                @Html.ActionLink(Model.Name, "Details", "Theater", new { theaterId = Model.TheaterId }, null)
+            </h2>
+        </div>
+        <div class="col-md-12">
+            <h3><strong>Zip Code: </strong>@Model.Location</h3>
+        </div>
+
+        <div class="col-md-12">
+            <hr />
+        </div>
+    </div>
+</div>

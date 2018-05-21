@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<MovieViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Available Movies</h2>
+
+@using (Html.BeginForm("SearchByGenre", "Movie", FormMethod.Post, new { @class = "searchForm"} ))
+{
+    <ul class="genreSelectList">
+        @foreach (var genre in (IEnumerable<SilverScreener.Models.Genre>) ViewBag.AvailableGenres)
+        {
+            <li><button type="submit" class="genreSelect btn btn-primary">@genre.GenreName</button></li>
+        }
+    </ul>
+}
+
+<div id="movieList">
+    @foreach (var item in Model)
+    {
+        @Html.Partial("../Partials/_MovieDetails", item)
+    }
+</div>
+
+<div class="row">
+    <div>
+        @Html.ActionLink("+ Add Movie", "Create", "Movie")
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function() {
+        $(".genreSelect").click(function(e) {
+            e.preventDefault();
+            var val = $(this).html();
+            $.ajax({
+                url: $("form.searchForm").attr("action"),
+                data: {
+                    genreSearch: $(this).text()
+                },
+                type: "POST",
+                dataType: "html"
+            }).done(function(response) {
+                $("#movieList").html(response);
+            });
+        });
+    });
+</script>

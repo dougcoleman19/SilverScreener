@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SilverScreener.ViewModels.TheaterViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Theaters</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Search", "Theater", FormMethod.Post, new { @class = "search-form" }))
+        {
+            <div class="col-md-12">
+                <label for="theaterSearch" class="sr-only">Search</label>
+                <input type="text" id="theaterSearch" name="theaterSearch" placeholder="Search for your Movie Theater" class="form-control search-box" style="float: left; margin-right: 5px;"> <input type="submit" id="btnSearch" class="btn btn-primary" value="Search">
+                
+            </div>
+        }
+    </div>
+    <div id="theater-list">
+        @foreach (var item in Model)
+        {
+            @Html.Partial("../Partials/_TheaterDetails", item)
+        }
+    </div>
+</div>
+
+<div class="row">
+    @Html.ActionLink("+ Add Movie Theater", "Create", "Theater")
+</div>
+
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        $("#btnSearch").click(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: $("form.search-form").attr("action"),
+                data: {
+                    theaterSearch: $("#theaterSearch").val()
+                },
+                type: "POST",
+                dataType: "html"
+            }).done(function(response) {
+                $("#theater-list").html(response);
+            });
+        });
+    });
+</script>
